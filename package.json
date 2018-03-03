@@ -1,0 +1,25 @@
+{
+  "name": "Geckos-Team-31",
+  "version": "1.0.0",
+  "description": "Voyage-4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chingu-voyage4/Geckos-Team-31.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chingu-voyage4/Geckos-Team-31/issues"
+  },
+  "homepage": "https://github.com/chingu-voyage4/Geckos-Team-31#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.2"
+  }
+}
