@@ -4,10 +4,10 @@ const app = express();
 
 require('dotenv').config();
 
-app.use("/", require("./controllers"))
+app.use("/", require("./controllers"));
 
-var jsonParser = bodyParser.json()
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var jsonParser = bodyParser.json();
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server started. App listening on ${PORT}`))
+app.listen(PORT, () => console.log(`Server started. App listening on ${PORT}`));
