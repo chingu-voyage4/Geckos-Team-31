@@ -32,24 +32,51 @@ Modified clone of Mealpal, a monthly subscription service that allows users to o
 ## Getting Started
 This section details the steps to get started with the development and testing process
 
-#### Pre-requisites
+### Pre-requisites
 [Git](https://git-scm.com/downloads) - version control system   
 [npm](https://docs.npmjs.com/getting-started/installing-node) - package manager
 
-#### Installing
+### Installing
 ```
 git clone https://github.com/chingu-voyage4/Geckos-Team-31.git
 cd Geckos-Team-31.git
 npm install
 ```
 
-#### Contributing 
+### Contributing 
+IMPORTANT NOTE: Never ever push code into the master branch  
+
+Make sure you're in the development branch using `git branch`. If not, switch to it.    
+`git checkout development`  
+
+---
+Whenever you're working on a new feature or a fix, create a branch in the format 'feature/feature-name' or 'fix/fix-name'  
+`git checkout -b fix/account-page-redesign` 
+
+---
+Commit your new code or changes locally
+```
+git add *
+git commit -m 'added links and modals to change account password'
+```
+
+---
+Push your local changes to Github in it's corresponding branch  
+`git push origin fix/account-page-redesign`
+
+---
+Create a pull request in Github. Make sure you're making a pull request to development.
+![Pull Request Step 1](https://image.ibb.co/herEkH/Screenshot_from_2018_03_13_18_47_34.png)  
+
+![Pull Request Step 2](https://image.ibb.co/fPvMzc/Screenshot_from_2018_03_13_18_32_13.png)
+
+---
+And that's it. You've contributed. Good job! Repeat the whole process again for a new feature of fix.
+
+### Testing
 -to be added-
 
-#### Testing
--to be added-
-
-#### Deploying
+### Deploying
 -to be added-
 
 
