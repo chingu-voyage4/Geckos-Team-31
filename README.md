@@ -46,31 +46,25 @@ npm install
 ### Contributing 
 IMPORTANT NOTE: Never ever push code into the master branch  
 
-Make sure you're in the development branch using `git branch`. If not, switch to it.    
+- Make sure you're in the development branch using `git branch`. If not, switch to it.    
 `git checkout development`  
 
----
-Whenever you're working on a new feature or a fix, create a branch in the format 'feature/feature-name' or 'fix/fix-name'  
+- Whenever you're working on a new feature or a fix, create a branch in the format 'feature/feature-name' or 'fix/fix-name'  
 `git checkout -b fix/account-page-redesign` 
 
----
-Commit your new code or changes locally
+- Commit your new code or changes locally
 ```
 git add *
 git commit -m 'added links and modals to change account password'
 ```
 
----
-Push your local changes to Github in it's corresponding branch  
+- Push your local changes to Github in it's corresponding branch  
 `git push origin fix/account-page-redesign`
 
----
-Create a pull request in Github. Make sure you're making a pull request to development.
+- Create a pull request in Github. Make sure you're making a pull request to development.
 ![Pull Request Step 1](https://image.ibb.co/herEkH/Screenshot_from_2018_03_13_18_47_34.png)  
-
 ![Pull Request Step 2](https://image.ibb.co/fPvMzc/Screenshot_from_2018_03_13_18_32_13.png)
 
----
 And that's it. You've contributed. Good job! Repeat the whole process again for a new feature of fix.
 
 ### Testing
