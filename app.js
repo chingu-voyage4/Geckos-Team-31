@@ -4,7 +4,7 @@ const app = express();
 
 require('dotenv').config();
 
-app.use("/", require("./controllers"));
+app.use("/", require("./controllers/index.js"));
 
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });

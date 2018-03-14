@@ -2,9 +2,10 @@
 const express = require("express");
 const router = express.Router();
 
+router.use(express.static('./public'));
 
 router.get("/", (req, res) => {
-  // res.send("Hello world!");
+  res.sendFile('index.html', {root: './'});
 });
 
 module.exports = router;
