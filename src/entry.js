@@ -1,2 +1,13 @@
-const app = document.getElementById('app');
-app.innerHTML="<h1>Hello there, this is just a test! Or is it?</h1>";
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+
+class App extends React.Component{
+    render(){
+        return(
+            <h1>Nice, you just registered!</h1>
+        );
+    }
+}
+
+ReactDOM.render(<App/>, document.getElementById('app'));

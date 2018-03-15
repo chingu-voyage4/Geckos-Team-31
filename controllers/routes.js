@@ -6,10 +6,15 @@ const UserController = require('./user-controller.js')
 
 router.use(express.static('./public'));
 
+/*
+ serve static landing page 
+*/
 router.get("/", (req, res) => {
-  res.sendFile('index.html', {root: './'});
+  res.sendFile('landing-page.html', {root: './views/'});
 });
 
+router.get("/register", UserController.user_register_get);
+router.get("/login", UserController.user_login_get);
 router.post("/register", UserController.user_register_post);
 router.post("/login", UserController.user_login_post);
 router.post("/logout", UserController.user_logout_post);
