@@ -41,6 +41,10 @@ app.use(jsonParser, urlencodedParser);
 */
 app.use("/", require("./controllers/routes.js"));
 
+/*
+    for any unconfigured routes
+*/
+app.get('*', (req, res, next)=>res.send('Here lies nothing!'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server started. App listening on ${PORT}`));
