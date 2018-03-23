@@ -64,12 +64,17 @@ module.exports = function(sequelize, DataTypes){
                 location: location
             })
             .then(newUser => callback(null, newUser))
-            .catch(err => callback(err));
+            .catch(err => { //set Model validators error status code to 401
+                err.status = 401;
+                callback(err);
+            });
 
             return callback(null, user);
         })
         .catch(err=>callback(err))
     };
+
+    User.sync();
 
     return User;
 };

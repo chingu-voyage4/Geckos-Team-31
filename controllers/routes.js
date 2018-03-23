@@ -5,11 +5,6 @@ const router = express.Router();
 const UserController = require('./user-controller.js')
 
 /*
-  serve static asssets from public folder
-*/
-router.use(express.static('./public'));
-
-/*
   serve static landing page 
 */
 router.get("/", (req, res) => {
@@ -25,7 +20,18 @@ router.get("/register", UserController.user_register_get);
 router.get("/login", UserController.user_login_get);
 router.post("/register", UserController.user_register_post);
 router.post("/login", UserController.user_login_post);
-router.post("/logout", UserController.user_logout_post);
+router.get("/logout", UserController.user_logout);
+router.post("/logout", UserController.user_logout);
+
+/*
+  lunch routes
+*/
+router.get("/home", UserController.require_login, UserController.index_get);
+
+
+/*
+  authorized API routes
+*/
 
 // router.get("/lunch")
 module.exports = router;

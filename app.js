@@ -4,7 +4,9 @@ const app = express();
 const bodyParser = require("body-parser");
 const logger = require('morgan');
 
+const session = require("express-session");
 const Sequelize = require('sequelize');
+const SequelizeStore = require('connect-session-sequelize')(session.Store); //initialize sequelize with session store
 
 const router = require("./controllers/routes.js");
 const configDB = require('./config/connection.js');
@@ -40,10 +42,28 @@ app.use((req, res, next) => {
 /*
     set up express application
 */
-var jsonParser = bodyParser.json();
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-app.use(jsonParser, urlencodedParser); //populate request body into Request.body
 app.use(logger('tiny')); //logs request to the server in the console
+const jsonParser = bodyParser.json();
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.use(jsonParser, urlencodedParser); //populate request body into Request.body
+
+const store = new SequelizeStore({
+    db: sequelize
+});
+const sessOptions = {
+    secret: 'super fishy bears wander',
+    cookie: {httpOnly: true, secure: false},
+    resave: false,
+    saveUninitialized: false,
+    store: store
+}
+app.use(session(sessOptions));
+store.sync();
+
+/*
+  serve static asssets from public folder
+*/
+app.use(express.static('./public'));
 
 /*
     routing
@@ -62,7 +82,7 @@ app.use((err, req, res, next)=> { //error handler
             message: err.message
         }
     });
-}) 
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server started. App listening on ${PORT}`));
