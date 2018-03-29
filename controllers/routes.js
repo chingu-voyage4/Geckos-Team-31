@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const UserController = require('./user-controller.js')
+const PostController = require('./post-controller.js')
 
 /*
   serve static landing page 
@@ -26,12 +27,18 @@ router.post("/logout", UserController.user_logout);
 /*
   lunch routes
 */
-router.get("/home", UserController.require_login, UserController.index_get);
+router.get("/home", UserController.require_login, PostController.index_get);
 
 
 /*
   authorized API routes
 */
+router.post("/api/user/change-password", 
+  UserController.require_login, 
+  UserController.user_change_password);
+router.delete("/api/user/delete-user", 
+  UserController.require_login, 
+  UserController.user_delete);
 
-// router.get("/lunch")
+
 module.exports = router;

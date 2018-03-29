@@ -27,9 +27,7 @@ module.exports = function(sequelize, DataTypes){
         timestamps: false
     });
 
-    User.login = function(req, callback){
-        const {email, password} = req.body;
-
+    User.login = function({email, password}, callback){
         this.findOne({where:{email:email}})
         .then(user=>{
             if(!user){
@@ -47,9 +45,7 @@ module.exports = function(sequelize, DataTypes){
         .catch(err=>callback(err))
     };
 
-    User.register = function(req, callback){
-        const {email, password, location} = req.body;
-
+    User.register = function({email, password, location}, callback){
         this.findOne({where:{email:email}})
         .then(user=>{
             if(user){
@@ -72,6 +68,23 @@ module.exports = function(sequelize, DataTypes){
             return callback(null, user);
         })
         .catch(err=>callback(err))
+    };
+    User.delete = function(id, callback){
+        this.destroy({where:{id:id}})
+        .then(()=>callback());
+    }
+
+    User.changePassword = function(id, newPassword, callback){
+        this.update({password: newPassword}, {where: {id: id}})
+        .then(user => {
+            if(!user){
+                const err = new Error('Could not find the user in database!');
+                err.status = 401;
+                return callback(err);
+            }
+            return callback();
+        })
+        .catch(err=> callback(err));
     };
 
     User.sync();

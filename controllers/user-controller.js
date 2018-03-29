@@ -8,7 +8,9 @@ module.exports.user_login_get = function(req, res, next){
 
 module.exports.user_register_post = function(req, res, next){
     const User = req.models.User;
-    User.register(req, function(err, newUser){
+    const {email, password, location} = req.body;
+
+    User.register({email, password, location}, function(err, newUser){
         if(err) return next(err);
         if(newUser) {
             req.session.user = newUser;
@@ -21,7 +23,9 @@ module.exports.user_register_post = function(req, res, next){
 
 module.exports.user_login_post = function(req, res, next){
     const User = req.models.User;
-    User.login(req, function(err, user){
+    const {email, password} = req.body;
+    
+    User.login({email, password}, function(err, user){
         if(err) return next(err);
         if(user) {
             req.session.user = user    
@@ -62,8 +66,18 @@ module.exports.require_login = function(req, res, next){
 // to be replaced
 module.exports.user_get = function(req, res, next){
     res.send(req.session.user);
-}
+};
 
-module.exports.index_get = function(req, res, next){
-    res.sendFile('index.html', {root: './views/'})
-}
+module.exports.user_change_password = function(req, res, next){
+    const newPassword = req.body.password;
+    req.models.User.changePassword(req.session.user.id, newPassword, function(err){
+        if(err) return next(err);
+        return res.send('Your password has been changed!');
+    });
+};
+module.exports.user_delete = function(req, res, next){
+    req.models.User.delete(req.session.user.id, function(err){
+        if(err) return next(err);
+        return res.send('Your account has been deleted!');
+    });
+};
