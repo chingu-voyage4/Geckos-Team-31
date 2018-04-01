@@ -22,7 +22,7 @@ require('dotenv').config();
 const {PGUSER, PGPASSWORD, PGHOST, PGPORT, PGDATABASE} = configDB;
 const sequelize = new Sequelize(
     `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}:${PGPORT}/${PGDATABASE}`
-);
+, {logging: false});
 
 sequelize.authenticate()
 .then(()=>console.log('Database connection has been established successfully!'))
