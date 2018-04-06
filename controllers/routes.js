@@ -25,20 +25,17 @@ router.get("/logout", UserController.user_logout);
 router.post("/logout", UserController.user_logout);
 
 /*
-  lunch routes
+  protected routes
 */
 router.get("/home", UserController.require_login, PostController.index_get);
-
-
-/*
-  authorized API routes
-*/
-router.post("/api/user/change-password", 
+router.post("/account/change-password", 
   UserController.require_login, 
   UserController.user_change_password);
-router.delete("/api/user/delete-user", 
+router.delete("/account/delete", 
   UserController.require_login, 
   UserController.user_delete);
-
+router.post("/invite", 
+  UserController.require_login, 
+  UserController.invite_friend_post);
 
 module.exports = router;
