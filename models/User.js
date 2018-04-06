@@ -3,6 +3,12 @@ const saltRounds = 10;
 
 module.exports = function (sequelize, DataTypes) {
     const User = sequelize.define('users', {
+        id: {
+            type: DataTypes.UUID,
+            primaryKey: true,
+            defaultValue: DataTypes.UUIDV4,
+            allowNull: false
+        },
         email: {
             type: DataTypes.STRING,
             defaultValue: '',
@@ -34,6 +40,10 @@ module.exports = function (sequelize, DataTypes) {
                     msg: 'Invalid plan selected!'
                 }
             }
+        },
+        favorites: {
+            type: DataTypes.ARRAY(DataTypes.UUID),
+            defaultValue: []
         }
     }, {
         timestamps: false,
@@ -50,62 +60,58 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
-    User.login = function (email, password, callback) {
-        this.findOne({ where: { email: email } })
-            .then(user => {
-                if (!user) {
-                    const err = new Error("Account doesn't exist!");
-                    err.status = 401;
-                    throw err;
-                }
-                return bcrypt.compare(password, user.password)
-                    .then(match => {
-                        if (!match) {
-                            const err = new Error("Incorrect password!");
-                            err.status = 401;
-                            throw err;
-                        }
-                        return callback(null, user);
-                    })
-            })
-            .catch(err => callback(err))
-    };
-
-    User.register = function (email, password, callback) {
-        this.findOne({ where: { email: email } })
-            .then(user => {
-                if (user) {
-                    const err = new Error("Account already exists!");
-                    err.status = 401;
-                    throw err;
-                }
-
-                return this.create({ email, password })
-                    .then(newUser => callback(null, newUser))
-                    .catch(err => {
-                        err.status = 401;
-                        callback(err);
-                    });
-            })
-            .catch(err => callback(err))
-    };
-
-    User.delete = function (id, callback) {
-        this.destroy({ where: { id: id } })
-            .then(() => callback());
-    };
-
-    User.changePassword = function (id, newPassword, callback) {
-        this.update({ password: newPassword }, { where: { id: id } })
-            .then(user => {
-                if (!user) {
-                    const err = new Error('Could not find the user in database!');
-                    err.status = 401;
-                    return callback(err);
-                }
-                return callback();
-            })
+    User.login = async function (email, password, callback) {
+        const matchedUser = await this.findOne({ where: { email: email } , attributes: ['email', 'password']})
             .catch(err => callback(err));
+        if (!matchedUser) {
+            const err = new Error("Account doesn't exist!");
+            err.status = 401;
+            return callback(err);
+        }
+        const correctPassword= await bcrypt.compare(password, matchedUser.password)
+            .catch(err => callback(err));
+        if (!correctPassword) {
+            const err = new Error("Incorrect password!");
+            err.status = 401;
+            return callback(err);
+        }
+        return callback(null, matchedUser);
+    };
+
+    User.register = async function (email, password, callback) {
+        const matchedUser = await this.findOne({ where: { email: email } })
+            .catch(err => callback(err));
+        if (matchedUser) {
+            const err = new Error("Account already exists!");
+            err.status = 401;
+            return callback(err);
+        }
+        const createdUser = this.create({ email, password })
+            .catch(err => {
+                err.status = 401;
+                return callback(err);
+            })
+        return callback(null, createdUser);
+    };
+
+    User.delete = async function (id, callback) {
+        await this.destroy({ where: { id: id } })
+            .catch(err => callback(err));
+        return callback();
+    };
+
+    User.changePassword = async function (id, newPassword, callback) {
+        const updatedUser = await this.update({ password: newPassword }, { where: { id: id } })
+            .catch(err => callback(err));
+            
+        if (!updatedUser) {
+            const err = new Error('Could not find the user in database!');
+            err.status = 401;
+            return callback(err);
+        }
+        return callback();
+            
+            
     };
 
     User.sync({ alter: true });
