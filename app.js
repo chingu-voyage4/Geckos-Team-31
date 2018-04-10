@@ -51,6 +51,7 @@ const store = new SequelizeStore({
     db: sequelize
 });
 const sessOptions = {
+    name: 'gecko-login-session-cookie',
     secret: 'super fishy bears wander',
     cookie: {httpOnly: true, secure: false},
     resave: false,
