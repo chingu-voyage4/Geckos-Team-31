@@ -1,7 +1,19 @@
 module.exports.meals_get = async function(req, res, next){
-    if(!req.params) res.sendFile('index.html', {root: './views/'});
-    
-    const meals = await req.models.Meal.findAll({include: req.models.Restaurant}).catch(err => next(err));
+    if(!req.query) res.sendFile('index.html', {root: './views/'});
+    let restaurantWhereOptions = {};
+    if(req.query.restaurant)
+        restaurantWhereOptions.name = req.query.restaurant;
+
+    console.log(restaurantWhereOptions);
+
+    const meals = await req.models.Meal.findAll(
+        {include: 
+            {
+                model: req.models.Restaurant,
+                where: restaurantWhereOptions
+            }
+        }
+    ).catch(err => next(err));
     return res.send(meals);
     
 }
