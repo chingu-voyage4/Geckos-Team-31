@@ -34,7 +34,7 @@ module.exports.user_login_post = function (req, res, next) {
     User.login(email, password, function (err, user) {
         if (err) return next(err);
         if (user) {
-            req.session.user = user
+            req.session.user = user;
             return res.send("You are now logged in!");
         };
     });
@@ -57,14 +57,19 @@ module.exports.user_logout = function (req, res, next) {
 
 module.exports.require_login = function (req, res, next) {
     const User = req.models.User;
-    if (req.session && req.session.user) {
-        User.findOne({ where: { id: req.session.user.id } })
-            .then(match => {
-                if (!match) return res.redirect('/login');
-                else return next();
-            })
-            .catch(err => next(err))
-    } else return res.redirect('/login');
+    if(!req.session || !req.session.user) return res.redirect('/login');
+
+    User.findById(req.session.user.id)
+        .then(match => {
+            if (!match) return res.redirect('/login');
+            return next();
+        })
+        .catch(err => next(err))
+};
+
+module.exports.require_admin_login = function (req, res, next) {
+    if(req.session.user.email !== 'match@username.com') return res.redirect('/login');
+    return next();
 };
 
 // to be replaced
