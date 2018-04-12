@@ -32,9 +32,16 @@ sequelize.authenticate()
     all the models are made available at Request.models object
 */
 const UserModel = sequelize.import('./models/User.js'); //same as require('./models/User.js')(sequelize, Sequelize)
+const MealModel = sequelize.import('./models/Meal.js');
+const RestaurantModel = sequelize.import('./models/Restaurant.js');
+
+MealModel.belongsTo(RestaurantModel);
+
 app.use((req, res, next) => { 
     req.models = {
-        User: UserModel
+        User: UserModel,
+        Meal: MealModel,
+        Restaurant: RestaurantModel
     };
     next();
 });
