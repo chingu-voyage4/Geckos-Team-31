@@ -1,10 +1,10 @@
 module.exports.meals_get = async function(req, res, next){
-    if(!req.query) res.sendFile('index.html', {root: './views/'});
+    if(Object.keys(req.query).length === 0) 
+        return res.sendFile('index.html', {root: './views/'});
+
     let restaurantWhereOptions = {};
     if(req.query.restaurant)
         restaurantWhereOptions.name = req.query.restaurant;
-
-    console.log(restaurantWhereOptions);
 
     const meals = await req.models.Meal.findAll(
         {include: 
