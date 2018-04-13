@@ -24,11 +24,11 @@ module.exports = function (sequelize, DataTypes) {
                 notEmpty: { msg: 'The password field is empty!' }
             }
         },
-        location: {
+        city: {
             type: DataTypes.STRING,
             defaultValue: 'toronto',
             validate: {
-                notEmpty: {msg: 'The Location field is empty!'}
+                notEmpty: {msg: 'The City field is empty!'}
             }
         },
         plan: {
@@ -42,7 +42,11 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         favorites: {
-            type: DataTypes.ARRAY(DataTypes.UUID),
+            type: DataTypes.ARRAY(DataTypes.INTEGER),
+            defaultValue: []
+        },
+        orders: {
+            type: DataTypes.ARRAY(DataTypes.INTEGER),
             defaultValue: []
         }
     }, {
@@ -61,7 +65,7 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     User.login = async function (email, password, callback) {
-        const matchedUser = await this.findOne({ where: { email: email } , attributes: ['email', 'password']})
+        const matchedUser = await this.findOne({ where: { email: email }})
             .catch(err => callback(err));
         if (!matchedUser) {
             const err = new Error("Account doesn't exist!");

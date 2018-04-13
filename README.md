@@ -68,7 +68,14 @@ git commit -m 'added links and modals to change account password'
 And that's it. You've contributed. Good job! Repeat the whole process again for a new feature of fix.
 
 ### Testing
--to be added-
+Before you start the server, there's a few things you need to do.
+ - Run webpack through the npm script. This is set to watch for any changes in your reactjs files, so once you run the script, it'll automatically transpile the reactjs files to plainjs when you save. Make sure to give webpack 10 or so seconds to transpile everytime.  
+ `npm run webpack`
+
+- Use the nodemon npm script to run the server in a development environment. This is set to watch for any changes in your server-side files.  
+`npm run devstart`
+
+- Great. Now the server is up and running. 
 
 ### Deploying
 -to be added-
@@ -90,14 +97,26 @@ This sections details the whole process that went into building this web applica
 -to be added-
 
 ### Issues/Resolutions
--to be added-
+#### API for meals
 
+We were able to find two public API for querying meals, but none perfectly suited our needs
+
+**Locu API**  
+New account registration no longer allowed as API was acquired by GoDaddy. We attempted to cheat by using the api_key in the documentation examples, but to no avail. We could not come to a conclusion whether it was the api_key or if the API itself has changed, but we were not able to use all of the options presented in the documentation. For example, we were unable to use the menu_items field, which is an important field.
+
+**Zomato API**  
+We found that the while Zomato API provided a user-friendly API to work with, it was not an optimal solution. Querying for restaurant, location, meals each required seperate requests with each depending on one another. Which meant that not only did we had to make multiple requests, but also had to query from one request, wait for its response, then query for another, then wait again, and query again, and so on. There are lots of requests nodejs module for the job, however, it was still a more complicated solution than it has to be. 
+
+**Resolution**
+So, we have decided to create our own meals API. As we don't have actual data, we've decided to fill the database with dummy data, and those data can be accessed through a simple RESTFUL API. The front-end engineer can easily get a list of restaurants by making a GET request to '/restaurants/' or create new meals by making a PUT request to '/meals/add'.  
+
+---
 
 ## Credits
-* [Shazi Rahim](https://github.com/shazrahim94)
-* [Sohel](https://github.com/Sohel-ASM)
-* [Rachel Parris](https://github.com/RachelParris)
-* [Sujit Karki](https://github.com/Swoozeki) 
+- [Sohel](https://github.com/Sohel-ASM)
+- [Sujit Karki](https://github.com/Swoozeki) 
+- ~~[Shazi Rahim](https://github.com/shazrahim94)~~
+- ~~[Rachel Parris](https://github.com/RachelParris)~~
 
 
 ## License
