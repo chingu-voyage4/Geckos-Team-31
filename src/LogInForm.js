@@ -1,4 +1,5 @@
 import React from 'react';
+import {FormGroup, FormControl, Col, ControlLabel, Checkbox, Button} from 'react-bootstrap';
 
 class LogInForm extends React.Component {
     constructor(props)  {
@@ -33,10 +34,10 @@ class LogInForm extends React.Component {
     
     render() {
         return (
-          <Form>
+          <form>
             <FormGroup controlId="errormsg">
             <Col componentClass={ControlLabel} >
-              {`Error: ${this.state.error}`} // it's connected to logIn button right or register?
+              {`Error: ${this.state.error}`}
 
             </Col>
 
@@ -46,7 +47,7 @@ class LogInForm extends React.Component {
                 Email
               </Col>
               <Col sm={10}>
-                <FormControl id="email" type="email" placeholder="Email" onChange={this.changeHandler}/>
+                <FormControl type="email" placeholder="Email" onChange={this.changeHandler}/>
               </Col>
             </FormGroup>
             <FormGroup controlId="logInPassword">
@@ -54,7 +55,7 @@ class LogInForm extends React.Component {
                 Password
               </Col>
               <Col sm={10}>
-                <FormControl id="password" type="password" placeholder="Password" onChange={this.changeHandler}/>
+                <FormControl type="password" placeholder="Password" onChange={this.changeHandler}/>
               </Col>
             </FormGroup>
             <FormGroup>
@@ -67,7 +68,7 @@ class LogInForm extends React.Component {
                 <Button type="submit">Login</Button>
               </Col>
             </FormGroup>
-          </Form>
+          </form>
         );
     }
 }

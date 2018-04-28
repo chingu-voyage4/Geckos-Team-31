@@ -30,12 +30,12 @@ function LandingPage(props){
             <p>Join Today</p>
             <form action="#" method="post">
                 <div>
-                <label for="mail"></label>
-                <input type="email" id="mail" name="user_mail" value="E-mail" />
+                <label htmlFor="mail"></label>
+                <input type="email" id="mail" name="user_mail" placeholder="E-mail" />
                 </div>
                 <div>
-                <label for="Zip Code"></label>
-                <input type="text" name="zip-code" id="zip-code" pattern="[0-9] {5}" value="Zip Code" />
+                <label htmlFor="Zip Code"></label>
+                <input type="text" name="zip-code" id="zip-code" pattern="[0-9] {5}" placeholder="Zip Code" />
                 </div>
                 <div>
                 <button type="submit">Register</button>
@@ -117,7 +117,7 @@ function LandingPage(props){
             <h1 className="text-center">Find a MealPal place In Your Area</h1>
             <div className="embed-responsive embed-responsive-4by3">
                 <iframe className="embed-responsive-item" style={{border:0}} src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJpTvG15DL1IkRd8S0KlBVNTI&key=AIzaSyAPUxIyh09qeFNMncQF06IzVC16JPm3-x8"
-                allowfullscreen></iframe>
+                allowFullScreen></iframe>
             </div>
             </div>
         </div>

@@ -11,5 +11,6 @@ module.exports = {
             { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
         ]
     },
-    watch: true
+    watch: true,
+    mode: 'development'
 }
