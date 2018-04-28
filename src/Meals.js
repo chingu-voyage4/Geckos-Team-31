@@ -14,6 +14,17 @@ class Meals extends React.Component{
         //change meals state here
     }
 
+    getMeals(){
+
+        // fetch('/meals', {
+        //     method: 'POST',
+            
+        // })
+    }
+
+    componentDidMount(){
+        this.getMeals();
+    }
     render(){
         const {meals} = this.state;
         return(

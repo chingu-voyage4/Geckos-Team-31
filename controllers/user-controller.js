@@ -20,7 +20,7 @@ module.exports.user_register_post = function (req, res, next) {
         if (err) return next(err);
         if (newUser) {
             req.session.user = newUser;
-            return res.send("You're now registered!");
+            return res.send({success:{message:"You're now registered!"}});
         };
     });
 
@@ -35,7 +35,7 @@ module.exports.user_login_post = function (req, res, next) {
         if (err) return next(err);
         if (user) {
             req.session.user = user;
-            return res.send("You are now logged in!");
+            return res.send({success:{message:"You are now logged in!"}});
         };
     });
 
@@ -46,7 +46,7 @@ module.exports.user_logout = function (req, res, next) {
     if (req.session && req.session.user) {
         req.session.destroy(err => {
             if (err) return next(err);
-            return res.send('You are now logged out!');
+            return res.send({success:{message:'You are now logged out!'}});
         });
     } else {
         const err = new Error('You are already logged out!');
@@ -57,18 +57,30 @@ module.exports.user_logout = function (req, res, next) {
 
 module.exports.require_login = function (req, res, next) {
     const User = req.models.User;
-    if(!req.session || !req.session.user) return res.redirect('/login');
+    if(!req.session || !req.session.user) {
+        const err = new Error('You need to be logged in!');
+        error.status = 401;
+        return next(err)
+    };
 
     User.findById(req.session.user.id)
         .then(match => {
-            if (!match) return res.redirect('/login');
+            if (!match) {
+                const err = new Error('Sorry, your account does not exist!');
+                error.status = 401;
+                return next(err)
+            };
             return next();
         })
         .catch(err => next(err))
 };
 
 module.exports.require_admin_login = function (req, res, next) {
-    if(req.session.user.email !== 'match@username.com') return res.redirect('/login');
+    if(req.session.user.email !== 'match@username.com') {
+        const err = new Error('You need to be logged in as an admin!')
+        error.status = 401;
+        return next(err);
+    };
     return next();
 };
 
@@ -81,13 +93,13 @@ module.exports.user_change_password = function (req, res, next) {
     const newPassword = req.body.password;
     req.models.User.changePassword(req.session.user.id, newPassword, function (err) {
         if (err) return next(err);
-        return res.send('Your password has been changed!');
+        return res.send({success:{message:'Your password has been changed!'}});
     });
 };
 module.exports.user_delete = function (req, res, next) {
     req.models.User.delete(req.session.user.id, function (err) {
         if (err) return next(err);
-        return res.send('Your account has been deleted!');
+        return res.send({success:{message:'Your account has been deleted!'}});
     });
 };
 
@@ -108,6 +120,6 @@ module.exports.invite_friend_post = function(req, res, next){
     };
     transporter.sendMail(mailOptions, (err, info) => {
         if(err) return next(err);
-        return res.send(`Email send to ${req.body.to}`);
+        return res.send({success:{message:`Email send to ${req.body.to}`}});
     });
 }
