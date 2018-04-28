@@ -33,10 +33,10 @@ class LogInForm extends React.Component {
     
     render() {
         return (
-          <Form>
+          <form>
             <FormGroup controlId="errormsg">
             <Col componentClass={ControlLabel} >
-              {`Error: ${this.state.error}`} // it's connected to logIn button right or register?
+              {`Error: ${this.state.error}`} /* it's connected to logIn button right or register? */
 
             </Col>
 
@@ -67,7 +67,7 @@ class LogInForm extends React.Component {
                 <Button type="submit">Login</Button>
               </Col>
             </FormGroup>
-          </Form>
+          </form>
         );
     }
 }
