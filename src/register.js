@@ -35,6 +35,26 @@ class RegistrationForm extends React.Component {
             </FormGroup>
           </Form>
             
+            <!----- Meal plan and city section ---->
+            
+          <Form inline>
+            <FormGroup controlId="planSelect">
+              <Checkbox>Lot of meals </Checkbox>
+              <Checkbox>Some meals </Checkbox>
+            </FormGroup>
+            <FormGroup controlId="citySelect">
+              <ControlLabel>City</ControlLabel>
+              <FormControl componentClass="select">
+                <option value="ny">New York</option>
+                <option value="tn">Toronto</option>
+                <option value="la">Los Angeles</option>
+                <option value="gr">Grand Rapids</option>
+                <option value="st">Seatle</option>
+              </FormControl>
+            </FormGroup>
+          </Form>    
+            
+            
             <!--------Form section for email and password with error message--->
             
           <Form horizontal>
@@ -67,26 +87,7 @@ class RegistrationForm extends React.Component {
                 <Button type="submit">Sign Up</Button>
               </Col>
             </FormGroup>
-          </Form>      
-           
-            <!----- Meal plan and city section ---->
-            
-          <Form inline>
-            <FormGroup controlId="planSelect">
-              <Checkbox>Lot of meals </Checkbox>
-              <Checkbox>Some meals </Checkbox>
-            </FormGroup>
-            <FormGroup controlId="citySelect">
-              <ControlLabel>City</ControlLabel>
-              <FormControl componentClass="select">
-                <option value="ny">New York</option>
-                <option value="tn">Toronto</option>
-                <option value="la">Los Angeles</option>
-                <option value="gr">Grand Rapids</option>
-                <option value="st">Seatle</option>
-              </FormControl>
-            </FormGroup>
-          </Form>    
+          </Form>       
 
         </section> 
         )
