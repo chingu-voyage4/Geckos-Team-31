@@ -17,7 +17,8 @@ class App extends React.Component{
     render(){
         let content;
         if(this.state.page==='landing') content= <LandingPage changePage={this.changePage.bind(this)}/>
-        if(this.state.page==='login') content = <LogInForm/>
+        if(this.state.page==='login') content = <LogInForm changePage={this.changePage.bind(this)}/>
+        if(this.state.page==='meals') content=<h1>This is the meals section!</h1>
         return(
             <div id="wrapper">
                 {content}
