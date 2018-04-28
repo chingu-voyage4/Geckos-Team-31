@@ -26,7 +26,10 @@ class LogInForm extends React.Component {
           body: JSON.stringify({
             email: this.state.email,
             password: this.state.password
-          })
+          }),
+          headers: {
+            'content-type': 'application/json'
+          }
         })
         .then(res => res.json())
         .then(json => {
@@ -39,7 +42,7 @@ class LogInForm extends React.Component {
         let error;
         if(this.state.error) error= `Error: ${this.state.error}`;
         return (
-          <form>
+          <form onSubmit={this.submitHandler.bind(this)}>
             <FormGroup controlId="errormsg">
             <Col componentClass={ControlLabel} >
               <span id="form-error">{error}</span>
