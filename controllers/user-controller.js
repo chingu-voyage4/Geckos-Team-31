@@ -14,9 +14,9 @@ module.exports.user_login_get = function (req, res, next) {
 
 module.exports.user_register_post = function (req, res, next) {
     const User = req.models.User;
-    const {email, password, location} = req.body;
+    const {email, password, city, plan} = req.body;
 
-    User.register(email, password, function (err, newUser) {
+    User.register(email, password, city, plan, function (err, newUser) {
         if (err) return next(err);
         if (newUser) {
             req.session.user = newUser;

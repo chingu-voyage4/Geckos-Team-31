@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './Footer';
 
 function LandingPage(props){
     return(
@@ -6,19 +7,15 @@ function LandingPage(props){
             {/* // <!---Header & Nav bar --> */}
         <div className="header container-fluid">
         <div className="row d-flex justify-content-between navbar" role="navigation">
-            <div className="col-4">
-            <div className="row d-flex">
-                <div className="col-2 icon">
-                <img className="img-fluid" src="https://s26.postimg.org/yl58a3aft/MP_Logo1.jpg" alt="MealPal logo" />
-                </div>
-                <div className="col-2">
-                <h1>MealPaL</h1>
+            <div className="col-sm-6">
+                <div className="row d-flex">
+                    <div className="col-sm-2">
+                        <h1>MEALACQUIANTANCE</h1>
+                    </div>
                 </div>
             </div>
-            </div>
-            <div className="col-3">
-            <button id="login-button" onClick={()=>props.changePage('login')}>LogIn</button>
-            <button id="register-button" onClick={()=>props.changePage('register')}>Register</button>
+            <div className="col-sm-6">
+                <button id="login-button" onClick={()=>props.changePage('login')}>LogIn</button>
             </div>
         </div>
 
@@ -28,19 +25,7 @@ function LandingPage(props){
             <h2>Meals For
                 <br/>Less Than $6</h2>
             <p>Join Today</p>
-            <form action="#" method="post">
-                <div>
-                <label htmlFor="mail"></label>
-                <input type="email" id="mail" name="user_mail" placeholder="E-mail" />
-                </div>
-                <div>
-                <label htmlFor="Zip Code"></label>
-                <input type="text" name="zip-code" id="zip-code" pattern="[0-9] {5}" placeholder="Zip Code" />
-                </div>
-                <div>
-                <button type="submit">Register</button>
-                </div>
-            </form>
+            <button id="register-button" onClick={()=>this.changePage('register')}>Register</button>
             </div>
 
             {/* <!--- Sliding Images for the Home page ----> */}
@@ -71,10 +56,10 @@ function LandingPage(props){
         </div>
         </div>
 
-        {/* <!-----How MealPal Works Section----> */}
+        {/* <!-----How MEALACQUIANTANCE Works Section----> */}
 
         <div className="section2 container">
-        <h2 className="text-center">The Way MealPal Works</h2>
+        <h2 className="text-center">The Way MEALACQUIANTANCE Works</h2>
         <div id="carousel-2" className="carousel slide" data-ride="carousel">
             <div className="carousel-inner">
             <div className="carousel-item active">
@@ -114,7 +99,7 @@ function LandingPage(props){
         <div className="Section3 Map container">
         <div className="row">
             <div className="col">
-            <h1 className="text-center">Find a MealPal place In Your Area</h1>
+            <h1 className="text-center">Find a MEALACQUIANTANCE place In Your Area</h1>
             <div className="embed-responsive embed-responsive-4by3">
                 <iframe className="embed-responsive-item" style={{border:0}} src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJpTvG15DL1IkRd8S0KlBVNTI&key=AIzaSyAPUxIyh09qeFNMncQF06IzVC16JPm3-x8"
                 allowFullScreen></iframe>
@@ -128,7 +113,7 @@ function LandingPage(props){
         <div className="Section4 container">
         <div className="row">
             <div className="col">
-            <img className="img-fluid" src="#" alt="MealPal robot icon" />
+            <img className="img-fluid" src="#" alt="MEALACQUIANTANCE robot icon" />
             <div id="carousel-3 Controls" className="carousel-slide" data-ride="carousel">
                 <ul className="carousel-inner">
                 <li className="carousel-item active">
@@ -201,7 +186,7 @@ function LandingPage(props){
             <br/>Meal plans are monthly and automatically renewable.
         </p>
         <div className="row justify-content-center">
-            <div className="col-3">
+            <div className="col-sm-3">
             <div className="card text-center">
                 <div className="card-body">
                 <h5 className="card-title">Lunch</h5>
@@ -224,7 +209,7 @@ function LandingPage(props){
                 </div>
             </div>
             </div>
-            <div className="col-3">
+            <div className="col-sm-3">
             <div className="card text-center">
                 <div className="card-body">
                 <h5 className="card-title">Dinner</h5>
@@ -252,33 +237,7 @@ function LandingPage(props){
         </div>
 
         {/* <!--- Section 6, Footer --> */}
-        <div className="Section-6 container">
-        <div className="row justify-content-center">
-            <img className="img-fluid" src="#" alt="Facebook icon" />
-            <img className="img-fluid" src="#" alt="Twitter icon" />
-            <img className="img-fluid" src="#" alt="Instagram icon" />
-        </div>
-        <div className="row justify-content-center">
-            <ul className="col-sm-auto nav">
-            <li className="nav-item">
-                <a className="nav-link" href="#">Contact Us</a>
-            </li>
-            <li className="nav-item">
-                <a className="nav-link" href="#">FAQS</a>
-            </li>
-            <li className="nav-item">
-                <a className="nav-link" href="#">Terms of Use</a>
-            </li>
-            <li className="nav-item">
-                <a className="nav-link" href="#">Privacy Policy</a>
-            </li>
-            <li className="nav-item">
-                <a className="nav-link" href="#">Hiring Now</a>
-            </li>
-            </ul>
-        </div>
-        <p className="text-center">&copy;MealPal, Inc.</p>
-        </div>
+        <Footer/>
         </div>
     );
 }

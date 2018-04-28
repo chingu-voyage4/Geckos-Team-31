@@ -12,8 +12,11 @@ class LogInForm extends React.Component {
     }
 
     changeHandler(e) {
-      const target = e.target.id;
-      this.setState({target: e.target.value});
+      if(e.target.id==='logInEmail') this.setState({email: e.target.value});
+      else if(e.target.id==='logInPassword'){
+        if(e.target.value.length < 8) this.setState({error: 'Password must be at least 8 characters long!'})
+        this.setState({password: e.target.value});
+      }
     }
 
     submitHandler(e){
@@ -33,11 +36,13 @@ class LogInForm extends React.Component {
     }
     
     render() {
+        let error;
+        if(this.state.error) error= `Error: ${this.state.error}`;
         return (
           <form>
             <FormGroup controlId="errormsg">
             <Col componentClass={ControlLabel} >
-              {`Error: ${this.state.error}`}
+              <span id="form-error">{error}</span>
 
             </Col>
 
@@ -47,7 +52,7 @@ class LogInForm extends React.Component {
                 Email
               </Col>
               <Col sm={10}>
-                <FormControl type="email" placeholder="Email" onChange={this.changeHandler}/>
+                <FormControl type="email" placeholder="Email" onChange={this.changeHandler.bind(this)}/>
               </Col>
             </FormGroup>
             <FormGroup controlId="logInPassword">
@@ -55,7 +60,7 @@ class LogInForm extends React.Component {
                 Password
               </Col>
               <Col sm={10}>
-                <FormControl type="password" placeholder="Password" onChange={this.changeHandler}/>
+                <FormControl type="password" placeholder="Password" onChange={this.changeHandler.bind(this)}/>
               </Col>
             </FormGroup>
             <FormGroup>

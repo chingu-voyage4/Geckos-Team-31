@@ -82,7 +82,7 @@ module.exports = function (sequelize, DataTypes) {
         return callback(null, matchedUser);
     };
 
-    User.register = async function (email, password, callback) {
+    User.register = async function (email, password, city, plan, callback) {
         const matchedUser = await this.findOne({ where: { email: email } })
             .catch(err => callback(err));
         if (matchedUser) {
@@ -90,7 +90,7 @@ module.exports = function (sequelize, DataTypes) {
             err.status = 401;
             return callback(err);
         }
-        const createdUser = this.create({ email, password })
+        const createdUser = this.create({ email, password, city, plan })
             .catch(err => {
                 err.status = 401;
                 return callback(err);
