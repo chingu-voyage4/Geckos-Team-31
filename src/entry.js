@@ -5,7 +5,10 @@ import ReactDOM from 'react-dom';
 class App extends React.Component{
     render(){
         return(
-            <h1>Nice, you just registered!</h1>
+            <form method="post" action="/api/user/change-password">
+                <input name="password" placeholder="new password"/>
+                <button type="submit">Delete me!</button>
+            </form>
         );
     }
 }

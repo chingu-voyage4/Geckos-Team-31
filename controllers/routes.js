@@ -9,7 +9,7 @@ const RestaurantController = require('./restaurant-controller.js')
   serve static landing page 
 */
 router.get("/", (req, res) => {
-  res.sendFile('landing-page.html', {
+  res.sendFile('index.html', {
     root: './views/'
   });
 });
