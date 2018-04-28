@@ -1,14 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import LandingPage from './LandingPage';
+import LogInForm from './LogInForm';
 
 class App extends React.Component{
+    constructor(){
+        super();
+        this.state = {
+            page: 'landing'
+        };
+    }
+
+    changePage(newPage){
+        this.setState({page: newPage});
+    }
     render(){
+        let content;
+        if(this.state.page==='landing') content= <LandingPage changePage={this.changePage.bind(this)}/>
+        if(this.state.page==='login') content = <LogInForm/>
         return(
-            <form method="post" action="/api/user/change-password">
-                <input name="password" placeholder="new password"/>
-                <button type="submit">Delete me!</button>
-            </form>
+            <div id="wrapper">
+                {content}
+            </div>
         );
     }
 }

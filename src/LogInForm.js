@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 class LogInForm extends React.Component {
     constructor(props)  {
@@ -27,21 +26,16 @@ class LogInForm extends React.Component {
         })
         .then(res => res.json())
         .then(json => {
-          if (json.status) this.setState({error:json.message};
+          if (json.status) this.setState({error:json.message});
         })
         .catch(new Error('Request failed!'));
     }
-// hold on
-/*
-ok, run the program in browser and test the login form. This is a login form, yea, that's what I get confused earlier
-I see...
-*/
+    
     render() {
         return (
           <Form>
             <FormGroup controlId="errormsg">
             <Col componentClass={ControlLabel} >
-// here? oh, ok
               {`Error: ${this.state.error}`} // it's connected to logIn button right or register?
 
             </Col>
@@ -77,3 +71,5 @@ I see...
         );
     }
 }
+
+export default LogInForm;
