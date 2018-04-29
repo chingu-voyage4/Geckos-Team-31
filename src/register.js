@@ -7,42 +7,84 @@ class RegistrationForm extends React.Component {
         this.state = {
           email: null,
           password: null,
-          error: null  
+          plan: null,
+          city: null,
+          error: null
         }
     }
-    
+
+    //finish this for plan and city too// yeah , got it. thnx
     changeHandler(e) {
-      const target = e.target.id;
-      this.setState({target: e.target.value});    
+      //to be edited
+      if(e.target.id==='registerEmail') this.setState({email: e.target.value});
+      else if(e.target.id==='registerPassword'){
+        if(e.target.value.length < 8) this.setState({error: 'Password must be at least 8 characters long!'})
+        this.setState({password: e.target.value});
+      }
+      else if(e.target.id==='planSelect') this.setState({plan: e.target.value});
+      else if(e.target.id==='registerEmail') this.setState({email: e.target.value});
+// I created two checkboxes for meal plan.
+// and five cities selection option for now, for city // ok, checking in google now.
+
+
     }
-    
+
     submitHandler(e) {
-    
+      e.preventDefault();
+      const {email, password, plan, city} = this.state;
+      fetch('/register', {
+        method: 'POST',
+        body: JSON.stringify({
+          email, password, plan, city
+        }),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .then(json => {
+        if (json.error) this.setState({error:json.message});
+        else this.props.changePage('meals');
+      })
+      .catch(new Error('Request failed!'));
     }
-    
-    render() {
+
+     render() {
         return (
-        <section controlId="form">
-            <! ---- First name and last name form  section-->
-          <Form inline>
-            <FormGroup controlId="firstName">
-              <ControlLabel>First Name</ControlLabel>{' '}
-              <FormControl type="text" />
-            </FormGroup>{' '}  
-            <FormGroup controlId="lastName">
-              <ControlLabel>Last Name</ControlLabel>{' '}
-              <FormControl type="text" />
+          <form onSubmit={this.submitHandler}>
+            <FormGroup controlId="errormsg">
+
             </FormGroup>
-          </Form>
-            
-            <!----- Meal plan and city section ---->
-            
-          <Form inline>
-            <FormGroup controlId="planSelect">
-              <Checkbox>Lot of meals </Checkbox>
-              <Checkbox>Some meals </Checkbox>
+            <FormGroup controlId="registerEmail">
+              <Col componentClass={ControlLabel} sm={2}>
+                Email
+              </Col>
+              <Col sm={10}>
+                <FormControl type="email" placeholder="email@" onChange={this.changeHandler}/>
+              </Col>
             </FormGroup>
-            <FormGroup controlId="citySelect">
+            <FormGroup controlId="registerPassword">
+              <Col componentClass={ControlLabel} sm={2}>
+                Password
+              </Col>
+              <Col sm={10}>
+                <FormControl type="password" placeholder="Password" onChange={this.changeHandler}/>
+              </Col>
+            </FormGroup>
+            <FormGroup>
+              <Col smOffset={2} sm={10}>
+                <Checkbox>Remember me</Checkbox>
+              </Col>
+            </FormGroup>
+            <FormGroup controlId="planSelect" onChange={this.changeHandler}>
+              <Radio name="radioGroup" inline>
+                Lunch a bunch
+              </Radio>{' '}
+              <Radio name="radioGroup" inline>
+                Lunch a lot
+              </Radio>{' '}
+            </FormGroup>
+            <FormGroup controlId="citySelect" onChange={this.changeHandler}>
               <ControlLabel>City</ControlLabel>
               <FormControl componentClass="select">
                 <option value="ny">New York</option>
@@ -52,54 +94,22 @@ class RegistrationForm extends React.Component {
                 <option value="st">Seatle</option>
               </FormControl>
             </FormGroup>
-          </Form>    
-            
-            
-            <!--------Form section for email and password with error message--->
-            
-          <Form horizontal>
-            <FormGroup controlId="errormsg">
-            
-            </FormGroup>
-            <FormGroup controlId="logInEmail">
-              <Col componentClass={ControlLabel} sm={2}>
-                Email
-              </Col>
-              <Col sm={10}>
-                <FormControl type="email" placeholder="email@" ?>
-              </Col>
-            </FormGroup>
-            <FormGroup controlId="logInPassword">
-              <Col componentClass={ControlLabel} sm={2}>
-                Password
-              </Col>
-              <Col sm={10}>
-                <FormControl type="password" placeholder="Password" />
-              </Col>
-            </FormGroup>
-            <FormGroup>
-              <Col smOffset={2} sm={10}>
-                <Checkbox>Remember me</Checkbox>
-              </Col>
-            </FormGroup>
             <FormGroup>
               <Col smOffset={2} sm={10}>
                 <Button type="submit">Sign Up</Button>
               </Col>
             </FormGroup>
-          </Form>       
-
-        </section> 
+          </form>
         )
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
 }

@@ -12,7 +12,7 @@ class LogInForm extends React.Component {
     }
 
     changeHandler(e) {
-      if(e.target.id==='logInEmail') this.setState({email: e.target.value});
+      if(e.target.id==='logInEmail') {this.setState({email: e.target.value});}
       else if(e.target.id==='logInPassword'){
         if(e.target.value.length < 8) this.setState({error: 'Password must be at least 8 characters long!'})
         this.setState({password: e.target.value});
