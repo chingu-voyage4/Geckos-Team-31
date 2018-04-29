@@ -1,5 +1,6 @@
 import React from 'react';
 import FilterMenu from './FilterMenu';
+import Meal from './Meal';
 
 class Meals extends React.Component{
     constructor(){
@@ -15,11 +16,7 @@ class Meals extends React.Component{
     }
 
     getMeals(){
-
-        // fetch('/meals', {
-        //     method: 'POST',
-            
-        // })
+        //get initial meals state here
     }
 
     componentDidMount(){
