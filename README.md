@@ -115,7 +115,7 @@ So, we have decided to create our own meals API. As we don't have actual data, w
 ## Credits
 - [Sohel](https://github.com/Sohel-ASM)
 - [Sujit Karki](https://github.com/Swoozeki) 
-- ~~[Shazi Rahim](https://github.com/shazrahim94)~~
+- [Shazi Rahim](https://github.com/shazrahim94)~~
 - ~~[Rachel Parris](https://github.com/RachelParris)~~
 
 
