@@ -2,7 +2,7 @@ import React from 'react';
 
 function FilterMenu(props){
     return(
-        <p>FilterMenu</p>
+        <p>FilterMenu is here!</p>
     );
 }
 

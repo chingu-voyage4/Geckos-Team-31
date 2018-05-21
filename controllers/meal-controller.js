@@ -1,9 +1,6 @@
 const Op = require('sequelize').Op;
 
 module.exports.meals_get = async function(req, res, next){
-    if(Object.keys(req.query).length === 0) 
-        return res.sendFile('index.html', {root: './views/'});
-
     let restaurantWhereOptions = {address:{}};
     let mealWhereOptions = {};
     if(req.query.city)

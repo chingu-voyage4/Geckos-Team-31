@@ -33,8 +33,9 @@ class LogInForm extends React.Component {
         })
         .then(res => res.json())
         .then(json => {
-          if (json.error) this.setState({error:json.message});
-          else this.props.changePage('meals');
+          console.log(json);
+          if (json.error) this.setState({error:json.error.message});
+          else if(json.success) this.props.changePage('meals');
         })
         .catch(new Error('Request failed!'));
     }

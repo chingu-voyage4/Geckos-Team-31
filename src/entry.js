@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import LandingPage from './LandingPage';
 import LogInForm from './LogInForm';
+import Meals from './Meals';
 
 class App extends React.Component{
     constructor(){
@@ -18,7 +19,7 @@ class App extends React.Component{
         let content;
         if(this.state.page==='landing') content= <LandingPage changePage={this.changePage.bind(this)}/>
         if(this.state.page==='login') content = <LogInForm changePage={this.changePage.bind(this)}/>
-        if(this.state.page==='meals') content=<h1>This is the meals section!</h1>
+        if(this.state.page==='meals') content= <Meals/>
         return(
             <div id="wrapper">
                 {content}
