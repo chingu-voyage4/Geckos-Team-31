@@ -77,16 +77,18 @@ class RegistrationForm extends React.Component {
               </Col>
             </FormGroup>
             <FormGroup controlId="planSelect" onChange={this.changeHandler}>
+              <select value={this.state.plan} onChange={this.changeHandler}>
               <Radio name="radioGroup" inline>
                 Lunch a bunch
               </Radio>{' '}
               <Radio name="radioGroup" inline>
                 Lunch a lot
               </Radio>{' '}
+              </select>
             </FormGroup>
             <FormGroup controlId="citySelect" onChange={this.changeHandler}>
               <ControlLabel>City</ControlLabel>
-              <FormControl componentClass="select">
+              <FormControl componentClass="select" value={this.state.city} onChange={this.changeHandler}>
                 <option value="ny">New York</option>
                 <option value="tn">Toronto</option>
                 <option value="la">Los Angeles</option>
